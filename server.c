@@ -16,27 +16,27 @@
 int main(int argc, char *argv[])
 {
 	int sock = socket(DOMAIN, SOCK_STREAM, 0), opt = 1, conx ;
-    socklen_t s = sizeof(struct sockaddr_in6) ;
+	socklen_t s = sizeof(struct sockaddr_in6) ;
 	struct sockaddr_in6 addr ;
 	char buff[SIZE] ;
 	
 	addr.sin6_family = DOMAIN ;
 	addr.sin6_port   = PORT   ;
 	addr.sin6_addr   = in6addr_any ;
-    memset(buff, 0, SIZE) ;
+	memset(buff, 0, SIZE) ;
 	
 	// make testing easier
 	if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)))
-    {
-        perror("Server - setsockopt addr failed.\n") ;
-        exit(-1) ;
-    }
+	{
+		perror("Server - setsockopt addr failed.\n") ;
+		exit(-1) ;
+	}
 	if (setsockopt(sock, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt)))
-    {
-        perror("Server - setsockopt port failed.\n") ;
-        exit(-1) ;
-    }
-    // end testing ease
+	{
+		perror("Server - setsockopt port failed.\n") ;
+		exit(-1) ;
+	}
+	// end testing ease
 	
 	if (bind(sock, (struct sockaddr *)&addr, s))
 	{
